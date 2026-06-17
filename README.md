@@ -3,12 +3,12 @@ InterDiode
 
 ![architecture](https://interdiode.fr/wp-content/uploads/2024/10/interdiode.png)
 
-InterDiode helps you to comfortably work with a proper air-gapped network. InterDiode gathers many resources from the internet and make them available on your internal, secured, network. You need two InterDiode servers, the first one being connected to the Internet and pushing downloaded data to the second, offline, server.
+InterDiode helps you to comfortably work with a proper air-gapped network. InterDiode gathers many resources from the internet and makes them available on your internal, secured, network. You need two InterDiode servers, the first one being connected to the Internet and pushing downloaded data to the second, offline, server.
 
 InterDiode copies programming language repositories, documentation, emails, or RSS feeds along with their linked web pages. All data is transferred through a data diode; you can either use your own data diode protocol or utilize the built-in one. With Interdiode:
 - Your USB drives will no longer travel back and forth between the internet and your internal network.,
 - third-party packages or libraries will always be up-to-date,
-- Developers are happier and more productive with such a better environment 🙂
+- Developers are happier and more productive with a better environment 🙂
 
 A complete authorization system is provided, allowing only allowed users to select which data is gathered and transferred to your red network.
 
@@ -25,8 +25,53 @@ Visit [our website](https://interdiode.fr/static/latest/index.html) for document
   You can watch it here: https://interdiode.fr/static/latest/_static/examples/demo-black.mp4
 </video>
 
+
 Features
 --------
+
+Developer tools
+
+All developers are now accustomed to working with numerous online tools. Here they are, now available on your internal network!
+* Ansible roles,
+* Helm charts,
+* Dash / Zeal documentations,
+* Ends of life of well-known softwares,
+* Plain Git repositories,
+* GitHub repositories with associated wikis and issues,
+* Popular JetBrains IDEs, libraries and plugins,
+* ReadTheDocs documentations,
+* Any ZIP archive of HTML files, that can be some selected documentation from a public website,
+* Containers from Docker registries,
+* Boxes from Vagrant repositories.
+* System and programming language packages
+
+The primary use of InterDiode is copying and making available libraries or packages for numerous programming languages or operating systems.
+* Complete mirror of APK (Alpine) repositories,
+* Complete clones of APT (Debian/Ubuntu) repositories or private ones,
+* Complete clones of Yum/DNF (Fedora/CentOS/RedHat) repositories,
+* Software released via GitHub releases,
+* C# .Net packages from NuGet repositories,
+* Go packages from golang.org,
+* Java (and similar languages) packages from Maven-compatible indexes,
+* JavaScript packages from NPM-compatible indexes,
+* PHP packages from Packagist,
+* Python packages from Pypi-compatible indexes,
+* Ruby packages from Rubygems-compatible indexes,
+* Rust packages from Cargo-compatible indexes.
+* Misc internet tools
+
+In addition to these copying functions, you also have a number of very useful utilities.
+* Paste text on the black side and copy it on the red side, like a pastebin,
+* Copy public GPG keys through a HKP server,
+* Download links found in a given URL,
+* Regularly fetch a link to make it available on the red network,
+* Copy RSS feeds and the linked pages as PDF files,
+* Downloads videos from standard video platforms,
+* ZIM archives, like Wikipedia or StackOverflow dumps,
+* Transfer raw uploaded files,
+* Transfer emails from an IMAP server to internal email accounts,
+* Plugins for Grafana.
+
 
 Requirements
 ------------
@@ -43,12 +88,25 @@ InterDiode requires the following to run:
   Moreover, for the sake of simplicity, the data to transfer must be stored several times, even if these temporary data is removed after the transfer.
 - The ability to run Docker containers on both servers.
 
-Installation
-------------
 
-The easiest way is to use the provided Docker images with the following docker compose file.
+Local demo
+-----------------
 
-:download:`example script </_downloads/contributing/example_script.py>`.
+Start the required services with the following command:
+
+```bash
+   export EMAIL=<enter_your_email_here>
+   export NAME=<enter_your_name_here>
+   curl -o compose.yaml https://interdiode.fr/static/latest/_static/examples/compose.yaml
+   echo "LICENSE_KEY=$(curl -L https://license.interdiode.fr/v1/license/\?product_id=42\&buyer_name=${NAME}\&buyer_email=${EMAIL}\&order_id=1)" > compose.env
+   docker compose up -d
+```
+
+* Once all the containers are running, you can access the web interfaces of both instances at `http://localhost:8881/ <http://localhost:8881/>`_ for the black instance and `http://localhost:8882/ <http://localhost:8882/>`_ for the red instance.
+* Access to the `black instance <http://localhost:8881/>`_ and create a new account with the "Create account" button. Then, log in with the newly created account.
+* In the "Administration" section, add the license file that you obtained from the InterDiode team. The license will be automatically applied to the red instance.
+* Access to the `red instance <http://localhost:8882/>`_ and create a new account with the "Create account" button. Then, log in with the newly created account.
+
 
 Data diodes
 -----------
@@ -61,21 +119,3 @@ If you cannot acquire a certified diode such as the Thales Elips SD, you can eas
 such as three TP-Link MC100CM or MC200CM transceivers. InterDiode allows direct use of a diode in UDP, without investing in additional software.
 You can look at [Dyode](https://github.com/wavestone-cdt/dyode/) to build your own diode with _three_ transceivers
 (the third one is connected to the RX of the emitter to bypass the link failure protection).
-
-Local development
------------------
-
-Start the required services with the following command:
-
-```bash
-docker-compose up -d
-export DATABASE_URL="postgresql://username:password@127.0.0.1:5432/database?ssl_check_hostname=true&ssl_cert_reqs=required&ssl_certfile=./id_tools/tox/localhost.crt&ssl_keyfile=./id_tools/tox/localhost.key&ssl_ca_certs=./id_tools/tox/CA.crt"
-export REDIS_URL="rediss://:password@127.0.0.1:6379/1?ssl_check_hostname=true&ssl_certfile=./id_tools/tox/localhost.crt&ssl_keyfile=./id_tools/tox/localhost.key&ssl_ca_certs=./id_tools/tox/CA.crt"
-poetry run python3 -m interdiode configuration apply
-poetry run python3 -m interdiode run http &
-poetry run python3 -m interdiode run beat &
-poetry run python3 -m interdiode run background
-```
-
-Then, you can access the web interface at http://localhost:8000/.
-You can also create a `local_settings.py` file to override the default settings.
