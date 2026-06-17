@@ -102,10 +102,10 @@ Start the required services with the following command:
    docker compose up -d
 ```
 
-* Once all the containers are running, you can access the web interfaces of both instances at `http://localhost:8881/ <http://localhost:8881/>`_ for the black instance and `http://localhost:8882/ <http://localhost:8882/>`_ for the red instance.
-* Access to the `black instance <http://localhost:8881/>`_ and create a new account with the "Create account" button. Then, log in with the newly created account.
+* Once all the containers are running, you can access the web interfaces of both instances at [http://localhost:8881/](http://localhost:8881/)_ for the black instance and [http://localhost:8882/](http://localhost:8882/) for the red instance.
+* Access to the [black instance](http://localhost:8881/) and create a new account with the "Create account" button. Then, log in with the newly created account.
 * In the "Administration" section, add the license file that you obtained from the InterDiode team. The license will be automatically applied to the red instance.
-* Access to the `red instance <http://localhost:8882/>`_ and create a new account with the "Create account" button. Then, log in with the newly created account.
+* Access to the [red instance](http://localhost:8882/) and create a new account with the "Create account" button. Then, log in with the newly created account.
 
 
 Data diodes
