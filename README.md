@@ -19,11 +19,7 @@ Overview
 Visit [our website](https://interdiode.fr/static/latest/index.html) for documentation.
 
 
-<video controls width="100%" preload="metadata">
-  <source src="https://interdiode.fr/static/latest/_static/examples/demo-black.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-  You can watch it here: https://interdiode.fr/static/latest/_static/examples/demo-black.mp4
-</video>
+![Apercu InterDiode](https://interdiode.fr/static/latest/_static/videos/preview-black.gif)
 
 
 Features
